@@ -1,0 +1,149 @@
+.dashbaordPage {
+  height: 100vh;
+  background: #efefef;
+  overflow: scroll;
+}
+.dashbaordPage::-webkit-scrollbar {
+  display: none;
+}
+.dashbaordPage .dashboardTitle {
+  position: relative;
+  width: fit-content;
+  display: block;
+}
+.dashbaordPage .dashboardTitle::before {
+  content: "";
+  background-color: var(--btn-bg-color);
+  position: absolute;
+  bottom: -10px;
+  height: 5px;
+  width: 50%;
+}
+.dashbaordPage .productsFilterDropDown button::after {
+  display: none;
+}
+.dashbaordPage .productsFilterInput {
+  width: 100%;
+  border: 1px solid var(--border-color);
+  padding: 5px;
+  outline: none;
+}
+.dashbaordPage .productsFilterInput:focus {
+  border: 1px solid var(--btn-bg-color);
+}
+.dashbaordPage .productsFilterDropDown span {
+  padding: 5px 4px;
+  cursor: pointer;
+  display: block;
+}
+.dashbaordPage .productsFilterDropDown span:hover {
+  background-color: var(--btn-hover-bg-color);
+  color: #fff;
+}
+.dashbaordPage .productsFilterDropDown div {
+  border: 1px solid var(--btn-bg-color);
+}
+.dashbaordPage .productDiv {
+  background-color: #fff;
+  border-radius: 5px;
+}
+.dashbaordPage .productDiv .imageDiv {
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  position: relative;
+}
+.dashbaordPage .productDiv .imageDiv img {
+  height: 300px !important;
+  border-radius: 5px;
+  width: 100%;
+  object-fit: cover;
+}
+.dashbaordPage .productDiv .productBodyDiv {
+  padding: 10px 0;
+  padding-left: 7px;
+}
+.dashbaordPage .productDiv .productBodyDiv h4 {
+  color: var(--headlines-color);
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: underline;
+  height: 55px;
+}
+.dashbaordPage .productDiv .productBodyDiv span {
+  color: var(--small-headlines-color);
+  font-weight: 500;
+}
+.dashbaordPage .categoryBodyDiv {
+  height: 76px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.dashbaordPage .categoryBodyDiv span {
+  font-size: 20px;
+  font-weight: 600;
+}
+.dashbaordPage .dashboardPageOverlayDeleteCategory {
+  display: none;
+  position: absolute;
+  top: 0;
+  background-color: var(--btn-bg-color);
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+.dashbaordPage .dashboardPageOverlayDeleteCategory::after {
+  content: "Delete";
+  color: #fff;
+  font-weight: 600;
+}
+.dashbaordPage .categoryBodyDiv:hover .dashboardPageOverlayDeleteCategory {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.dashbaordPage .productBodyDivOverlay {
+  height: 100%;
+  position: absolute;
+  top: 0;
+  color: #000;
+  background-color: #fff;
+  opacity: 0.75;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  left: 0;
+  width: 100%;
+}
+.dashbaordPage .productBodyDivOverlay::before {
+  content: "unAvilable";
+  position: absolute;
+  font-size: 30px;
+  font-weight: bold;
+  z-index: 99999;
+}
+.dashbaordPage .dashboardSettingFormGroup{
+    margin-bottom: 10px;
+}
+.dashbaordPage .dashboardSettingFormGroup input{
+    width: 100%;
+    border: 1px solid var(--border-color);
+    background-color: #fff;
+    cursor: not-allowed;
+    outline: none;
+    padding: 10px;
+}
+.dashbaordPage .dashboardSettingFormGroup label{
+    color: var(--btn-bg-color);
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+.dashbaordPage .dashboardSettingFormGroup img{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+}

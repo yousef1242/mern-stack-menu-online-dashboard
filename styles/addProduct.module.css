@@ -1,0 +1,128 @@
+.addProductPage {
+  background-color: #efefef;
+  overflow: scroll;
+  height: 100vh;
+}
+.addProductPage::-webkit-scrollbar {
+  display: none;
+}
+.addProductPage .addProductPageContainer {
+  width: 50%;
+}
+.addProductPage .addProductTitle {
+  position: relative;
+  width: fit-content;
+  display: block;
+}
+.addProductPage .addProductTitle::before {
+  content: "";
+  background-color: var(--btn-bg-color);
+  position: absolute;
+  bottom: -10px;
+  height: 5px;
+  width: 50%;
+}
+.addProductPage .addProductPageContainer .addProductFormGroup {
+  margin-bottom: 10px;
+  width: 100%;
+}
+.addProductPage .addProductPageContainer .addProductFormGroup select {
+  width: 100%;
+  border: 1px solid var(--border-color);
+  outline: none;
+  padding: 10px;
+}
+.addProductPage .addProductPageContainer .addProductFormGroup input {
+  width: 100%;
+  border: 1px solid var(--border-color);
+  outline: none;
+  padding: 10px;
+  background-color: #fff;
+}
+.addProductPage
+  .addProductPageContainer
+  .addProductFormGroup
+  .addProductFormGroupIsAvilableInput {
+  width: fit-content;
+  outline: none;
+  cursor: pointer;
+}
+.addProductPage .addProductPageContainer .addProductFormGroup input:focus {
+  border-color: var(--border-focus-color);
+  outline: none;
+}
+.addProductPage .addProductPageContainer .addProductFormGroup select:focus {
+  border-color: var(--border-focus-color);
+  outline: none;
+}
+.addProductPage
+  .addProductPageContainer
+  .addProductFormGroup
+  .addProductFormGroupIsAvilableInput:focus {
+  border: 1px solid var(--btn-bg-color);
+}
+/* Increase the width and height of the checkbox */
+.addProductPage
+  .addProductPageContainer
+  .addProductFormGroup
+  .addProductFormGroupIsAvilableInput {
+  width: 20px; /* Adjust the desired width */
+  height: 20px; /* Adjust the desired height */
+}
+
+/* Customize the appearance of the checkbox (optional) */
+.addProductPage
+  .addProductPageContainer
+  .addProductFormGroup
+  .addProductFormGroupIsAvilableInput::before {
+  content: ""; /* Required for pseudo-element */
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: #fff; /* Change the color to your preference */
+  transition: background-color 0.3s ease; /* Smooth transition (optional) */
+}
+
+/* Style for checked checkbox (optional) */
+.addProductPage
+  .addProductPageContainer
+  .addProductFormGroup
+  .addProductFormGroupIsAvilableInput:checked::before {
+  background-color: var(
+    --btn-bg-color
+  ); /* Change the color for checked state */
+}
+.addProductPage .addProductFormGroup .addProductFormGroupDivOverlayImage {
+  position: relative;
+}
+.addProductPage .addProductFormGroup .addProductFormGroupDivOverlayImage label {
+  position: absolute;
+  background-color: var(--btn-bg-color);
+  top: 0;
+  width: 100%;
+  height: 100%;
+  color: var(--text-color);
+  font-size: 30px;
+  font-weight: 600;
+  cursor: pointer;
+  display: none;
+}
+.addProductPage
+  .addProductFormGroup
+  .addProductFormGroupDivOverlayImage:hover
+  label {
+    display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.addProductPage .addProductFormGroup .addProductFormGroupDivImage{
+  height: 320px;
+  object-fit: cover;
+  width: 100%;
+}
+
+@media (max-width: 720px) {
+  .addProductPage .addProductPageContainer {
+    width: 100%;
+  }
+}
