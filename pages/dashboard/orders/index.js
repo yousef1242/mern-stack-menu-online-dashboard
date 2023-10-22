@@ -13,7 +13,7 @@ import { useRouter } from "next/router";
 import { BsFilter } from "react-icons/bs";
 import { Dropdown } from "react-bootstrap";
 
-const socket = io("http://localhost:8080");
+const socket = io("https://menuonline.onrender.com");
 
 const DashboardProducts = ({ orders, error }) => {
   const [ordersData, setOrdersData] = useState([]);
