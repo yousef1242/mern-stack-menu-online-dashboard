@@ -87,7 +87,7 @@ const DashboardSettingPage = () => {
                 <div className="rounded bg-white p-5 mb-5 mb-md-0 text-center">
                   <QRCode
                     className="w-100"
-                    value={`http://localhost:3000/restaurant/${restaurantId}`}
+                    value={`https://menuonlineclient.vercel.app/restaurant/${restaurantId}`}
                   />
                 </div>
               </div>
