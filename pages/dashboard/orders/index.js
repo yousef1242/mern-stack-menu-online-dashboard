@@ -323,7 +323,7 @@ const DashboardProducts = ({ orders, error }) => {
                   </div>
                 ))
               ) : (
-                <h3>No products exist</h3>
+                <h3>No orders exist</h3>
               )}
             </div>
           </div>
