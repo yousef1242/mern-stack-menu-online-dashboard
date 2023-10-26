@@ -37,6 +37,7 @@ const DashboardProducts = ({ orders, error }) => {
     }
   }, [orders]);
 
+  
   // restaurantId socket io room
   useEffect(() => {
     const restaurantData = Cookies.get("restaurantTokenAndId")
@@ -46,7 +47,9 @@ const DashboardProducts = ({ orders, error }) => {
     if (restaurantData) {
       socket.emit("joinRestaurantRoom", { restaurantId: restaurantData.id });
     }
+  }, []);
 
+  useEffect(() => {
     socket.on("newOrderCreatedToRestaurantId", (data) => {
       // Ensure that you're not adding duplicate orders to the state.
       setOrdersData((prevOrders) => {
