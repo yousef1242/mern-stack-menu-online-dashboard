@@ -43,7 +43,8 @@ const UpdateProductPage = () => {
     };
     getCategoriesDataForRestaurant();
   }, []);
-
+  
+  // update product function
   const submitFormHandler = async (e) => {
     e.preventDefault();
     const restaurantInfo = Cookies.get("restaurantTokenAndId")
@@ -196,16 +197,19 @@ const UpdateProductPage = () => {
                 </button>
                 {sizeAndPriceInputs?.map((input, index) => (
                   <div className="d-flex align-items-center mb-2" key={index}>
-                    <input
+                  <select
+                  value={input.size}
                       onChange={(e) => {
                         const newInputs = [...sizeAndPriceInputs];
                         newInputs[index].size = e.target.value;
                         setSizeAndPriceInputs(newInputs);
                       }}
-                      type="text"
-                      placeholder="size"
-                      value={input.size}
-                    />
+                    >
+                      <option value={""} selected>Choose size</option>
+                      <option value={"small"}>small</option>
+                      <option value={"medium"}>medium</option>
+                      <option value={"large"}>large</option>
+                    </select>
                     <input
                       onChange={(e) => {
                         const newInputs = [...sizeAndPriceInputs];

@@ -42,6 +42,7 @@ const AddProductPage = () => {
     getCategoriesDataForRestaurant();
   }, []);
 
+  // create product function
   const submitFormHandler = async (e) => {
     e.preventDefault();
     const restaurantInfo = Cookies.get("restaurantTokenAndId")
@@ -84,7 +85,7 @@ const AddProductPage = () => {
       console.log(error);
       toast.error(error.response?.data?.message);
       if (
-        error.response.data.message ===
+        error?.response?.data?.message ===
         "This restaurant doesn't subscribe in any plan"
       ) {
         router.push("/dashboard/error");
@@ -152,16 +153,18 @@ const AddProductPage = () => {
                 </button>
                 {sizeAndPriceInputs.map((input, index) => (
                   <div className="d-flex align-items-center mb-2" key={index}>
-                    <input
+                    <select
                       onChange={(e) => {
                         const newInputs = [...sizeAndPriceInputs];
                         newInputs[index].size = e.target.value;
                         setSizeAndPriceInputs(newInputs);
                       }}
-                      type="text"
-                      placeholder="size"
-                      value={input.size}
-                    />
+                    >
+                      <option selected>Choose size</option>
+                      <option value={"small"}>small</option>
+                      <option value={"medium"}>medium</option>
+                      <option value={"large"}>large</option>
+                    </select>
                     <input
                       onChange={(e) => {
                         const newInputs = [...sizeAndPriceInputs];
