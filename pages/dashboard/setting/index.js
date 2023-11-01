@@ -7,6 +7,7 @@ import requestDashboard from "@/utils/requestDashboard";
 import Cookies from "js-cookie";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
+import LoaderAnimation from "@/components/loaderAnimation/LoaderAnimation";
 
 const DashboardSettingPage = () => {
   const [name, setName] = useState("");
@@ -20,7 +21,8 @@ const DashboardSettingPage = () => {
   const [closeTime, setClodeTime] = useState("");
   const [restaurantId, setRestaurantId] = useState("");
   const [endDate, setEndDate] = useState("");
-  const router = useRouter()
+  const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
   useEffect(() => {
     const getRestaurantInfo = async () => {
@@ -28,7 +30,7 @@ const DashboardSettingPage = () => {
         ? JSON.parse(Cookies.get("restaurantTokenAndId"))
         : null;
       if (restaurantInfo === null) {
-        router.push("/")
+        router.push("/");
         return toast.error("Token doesn't exist please try again");
       }
       const { data } = await requestDashboard.get(
@@ -40,6 +42,7 @@ const DashboardSettingPage = () => {
         }
       );
       if (data) {
+        setLoading(false);
         setName(data.restaurantName);
         setTitle(data.restaurantTitle);
         setImage(data.restaurantImage);
@@ -54,7 +57,7 @@ const DashboardSettingPage = () => {
       }
     };
     getRestaurantInfo();
-  }, []);
+  }, [loading]);
 
   return (
     <>
@@ -163,6 +166,7 @@ const DashboardSettingPage = () => {
             </div>
           </div>
         </div>
+        {loading ? <LoaderAnimation /> : ""}
       </main>
     </>
   );

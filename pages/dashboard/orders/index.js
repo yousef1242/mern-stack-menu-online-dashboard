@@ -15,20 +15,21 @@ import { Dropdown } from "react-bootstrap";
 
 const socket = io("https://menuonline.onrender.com");
 
-const DashboardProducts = ({ orders, error }) => {
+const DashboardProducts = ({ orders, errorMessage }) => {
   const [ordersData, setOrdersData] = useState([]);
+  const [searchInputValue, setSearchInputValue] = useState("");
   const router = useRouter();
 
   // errors
   useEffect(() => {
-    if (error) {
-      toast.error(error);
+    if (errorMessage) {
+      toast.error(errorMessage);
       Cookies.remove("restaurantTokenAndId");
       setTimeout(() => {
         router.push("/subscribe");
       }, 2000);
     }
-  }, [error]);
+  }, [errorMessage]);
 
   // set orders in setOrdersData
   useEffect(() => {
@@ -37,7 +38,6 @@ const DashboardProducts = ({ orders, error }) => {
     }
   }, [orders]);
 
-  
   // restaurantId socket io room
   useEffect(() => {
     const restaurantData = Cookies.get("restaurantTokenAndId")
@@ -167,6 +167,23 @@ const DashboardProducts = ({ orders, error }) => {
     });
   };
 
+  // filter orders by search input
+  const filterorderBySearchInput = () => {
+    const filterOrders =
+      searchInputValue === ""
+        ? ordersData
+        : ordersData?.filter((order) =>
+            order.orderNumber.toLowerCase().includes(searchInputValue.toLowerCase())
+          );
+    setOrdersData(filterOrders);
+  };
+
+  // reset search input
+  const resetSearchInput = () => {
+    setOrdersData(orders);
+    setSearchInputValue("")
+  };
+
   return (
     <>
       <Head>
@@ -224,6 +241,17 @@ const DashboardProducts = ({ orders, error }) => {
                 </Dropdown>
               </div>
             </div>
+            <div className="mb-5 d-flex align-items-center justify-content-center gap-2">
+              <input
+                type="text"
+                className={classes.dashbaordPageSearchInputFilter}
+                placeholder="Search by order number..."
+                value={searchInputValue}
+                onChange={(e) => setSearchInputValue(e.target.value)}
+              />
+              <button onClick={filterorderBySearchInput}>Search</button>
+              <button onClick={resetSearchInput}>Reset</button>
+            </div>
             <div className="row">
               {ordersData?.length > 0 ? (
                 ordersData?.map((order) => (
@@ -236,7 +264,7 @@ const DashboardProducts = ({ orders, error }) => {
                         <span className="opacity-75">placed on : </span>
                         {order?.createdAt && (
                           <span>
-                            {new Date(order.createdAt).toLocaleDateString(
+                            {new Date(order?.createdAt).toLocaleDateString(
                               "en-US"
                             )}
                           </span>
@@ -272,7 +300,17 @@ const DashboardProducts = ({ orders, error }) => {
                               }
                             />
                           ) : (
-                            ""
+                            <span
+                              className="opacity-75"
+                              style={{
+                                background: "#099809",
+                                borderRadius: "2px",
+                                padding: "1px 2px",
+                                color: "#fff",
+                              }}
+                            >
+                              not prepared
+                            </span>
                           )}
                         </span>
                       </div>
@@ -283,15 +321,23 @@ const DashboardProducts = ({ orders, error }) => {
                         <span>
                           {order?.isPaid ? (
                             <AiOutlineCheck />
+                          ) : router.query.paid ? (
+                            <FaX
+                              onClick={() => updateOrderWhichIsPaid(order?._id)}
+                              style={{ cursor: "pointer" }}
+                            />
                           ) : (
-                            router.query.paid && (
-                              <FaX
-                                onClick={() =>
-                                  updateOrderWhichIsPaid(order?._id)
-                                }
-                                style={{ cursor: "pointer" }}
-                              />
-                            )
+                            <span
+                              className="opacity-75"
+                              style={{
+                                background: "#099809",
+                                borderRadius: "2px",
+                                padding: "1px 2px",
+                                color: "#fff",
+                              }}
+                            >
+                              not paid
+                            </span>
                           )}
                         </span>
                       </div>
@@ -361,10 +407,11 @@ export async function getServerSideProps(context) {
     };
   } catch (error) {
     console.log(error);
+    console.log(error?.response?.data?.message);
     // In case of an error, return an empty object or an error message, or handle it as needed
     return {
       props: {
-        error: error?.response?.data?.message,
+        errorMessage: error?.response?.data?.message,
       },
     };
   }

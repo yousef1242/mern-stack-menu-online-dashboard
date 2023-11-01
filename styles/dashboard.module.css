@@ -147,3 +147,13 @@
     border-radius: 50%;
     object-fit: cover;
 }
+.dashbaordPage .dashbaordPageSearchInputFilter{
+  border: 1px solid var(--border-color);
+  outline: none;
+  padding: 10px;
+  width: 400px;
+}
+.dashbaordPage .dashbaordPageSearchInputFilter:focus{
+  border-color: var(--border-focus-color);
+  outline: none;
+}
