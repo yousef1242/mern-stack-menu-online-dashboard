@@ -8,6 +8,7 @@ import Cookies from "js-cookie";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 import LoaderAnimation from "@/components/loaderAnimation/LoaderAnimation";
+import Image from "next/image";
 
 const DashboardSettingPage = () => {
   const [name, setName] = useState("");
@@ -105,7 +106,13 @@ const DashboardSettingPage = () => {
                   <div
                     className={`${classes.dashboardSettingFormGroup} col-12 text-center mb-4`}
                   >
-                    <img src={image} alt="" />
+                        <Image
+                          alt=""
+                          src={image}
+                          width={100}
+                          height={100}
+                          loading="lazy"
+                        />
                   </div>
                   <div
                     className={`${classes.dashboardSettingFormGroup} col-12 col-md-6`}

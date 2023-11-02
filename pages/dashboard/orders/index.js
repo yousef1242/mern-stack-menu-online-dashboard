@@ -51,6 +51,7 @@ const DashboardProducts = ({ orders, errorMessage }) => {
 
   useEffect(() => {
     socket.on("newOrderCreatedToRestaurantId", (data) => {
+      console.log(data);
       // Ensure that you're not adding duplicate orders to the state.
       setOrdersData((prevOrders) => {
         // Check if the order with the same ID already exists in the state.
@@ -407,7 +408,6 @@ export async function getServerSideProps(context) {
     };
   } catch (error) {
     console.log(error);
-    console.log(error?.response?.data?.message);
     // In case of an error, return an empty object or an error message, or handle it as needed
     return {
       props: {
