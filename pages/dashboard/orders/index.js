@@ -51,7 +51,7 @@ const DashboardProducts = ({ orders, errorMessage }) => {
 
   useEffect(() => {
     socket.on("newOrderCreatedToRestaurantId", (data) => {
-      console.log(data);
+      // console.log(data);
       // Ensure that you're not adding duplicate orders to the state.
       setOrdersData((prevOrders) => {
         // Check if the order with the same ID already exists in the state.
