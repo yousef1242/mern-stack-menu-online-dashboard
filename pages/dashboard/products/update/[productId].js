@@ -15,7 +15,7 @@ const UpdateProductPage = () => {
   const [ingredients, setIngredients] = useState("");
   const [isAvilable, setIsAvilable] = useState(false);
   const [file, setFile] = useState(null);
-  const [productImage, setProductImage] = useState(null);
+  const [productImage, setProductImage] = useState({});
   const [sizeAndPriceInputs, setSizeAndPriceInputs] = useState([
     { size: "", price: 0 },
   ]);
@@ -56,8 +56,10 @@ const UpdateProductPage = () => {
     if (!name || !category || !ingredients) {
       return toast.error("Please fill in all fields.");
     }
-    if (sizeAndPriceInputs.length === 0) {
-      return toast.error("Please write size with price.");
+    for (let i = 0; i < sizeAndPriceInputs.length; i++) {
+      if (sizeAndPriceInputs[i].size === "" || sizeAndPriceInputs[i].price === "") {
+        return toast.error("Please fill in all fields.");
+      }
     }
     const formData = new FormData();
     formData.append("restaurantId", restaurantInfo?.id);
@@ -66,7 +68,8 @@ const UpdateProductPage = () => {
     formData.append("category", category);
     formData.append("isAvilable", isAvilable);
     formData.append("file", file);
-    formData.append("image", productImage);
+    formData.append("productImagePublicId", productImage?.publicId);
+    formData.append("productImageUrl", productImage?.url);
     for (let i = 0; i < sizeAndPriceInputs.length; i++) {
       formData.append("size", sizeAndPriceInputs[i].size);
     }

@@ -54,6 +54,11 @@ const AddProductPage = () => {
     if (!name || !category || !ingredients || !file) {
       return toast.error("Please fill in all fields.");
     }
+    for (let i = 0; i < sizeAndPriceInputs.length; i++) {
+      if (sizeAndPriceInputs[i].size === "" || sizeAndPriceInputs[i].price === "") {
+        return toast.error("Please fill in all fields.");
+      }
+    }
     const formData = new FormData();
     formData.append("restaurantId", restaurantInfo?.id);
     formData.append("name", name);
@@ -84,12 +89,6 @@ const AddProductPage = () => {
       setLoading(false);
       console.log(error);
       toast.error(error.response?.data?.message);
-      if (
-        error?.response?.data?.message ===
-        "This restaurant doesn't subscribe in any plan"
-      ) {
-        router.push("/dashboard/error");
-      }
       if (error.response?.status === 400) {
         toast.error("File type is not supported");
       }

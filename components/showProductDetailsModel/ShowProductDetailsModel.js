@@ -36,6 +36,7 @@ const ShowProductDetailsModel = ({
           },
         }
       );
+      console.log(data);
       toast.success(data?.message);
       setLoading(false);
       setShowProductDetailsModel(false);
