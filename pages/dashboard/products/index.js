@@ -26,7 +26,7 @@ const DashboardProducts = ({ products, error }) => {
       toast.error(error);
       Cookies.remove("restaurantTokenAndId");
       setTimeout(() => {
-        router.push("/subscribe");
+        router.push("/");
       }, 2000);
     }
   }, [error]);
@@ -133,13 +133,17 @@ const DashboardProducts = ({ products, error }) => {
                   >
                     <div className={`${classes.productDiv}`}>
                       <div className={`${classes.imageDiv}`}>
-                        <Image
-                          alt=""
-                          src={product?.image}
-                          width={300}
-                          height={300}
-                          loading="lazy"
-                        />
+                        {product?.image?.url ? (
+                          <Image
+                            alt=""
+                            src={product?.image?.url}
+                            width={300}
+                            height={300}
+                            loading="lazy"
+                          />
+                        ) : (
+                          ""
+                        )}
                         {product?.isAvilable ? (
                           ""
                         ) : (

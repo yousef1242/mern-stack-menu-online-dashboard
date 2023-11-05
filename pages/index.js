@@ -3,14 +3,12 @@ import classes from "../styles/Home.module.css";
 import { useState } from "react";
 import CreateRestaurantForm from "@/components/forms/CreateRestaurantForm";
 import LoginRestaurantForm from "@/components/forms/LoginRestaurantForm";
+import Link from "next/link";
 
 const Home = () => {
   const [loginRestaurantFormShow, setLoginRestaurantFormShow] = useState(false);
   const [createRestaurantFormShow, setCreateRestaurantFormShow] =
     useState(false);
-
-  const isLoggedIn =
-    typeof localStorage !== "undefined" && localStorage.getItem("restaurantId");
 
   return (
     <>
@@ -34,14 +32,12 @@ const Home = () => {
                   >
                     Login
                   </span>
-                  {!isLoggedIn && (
                     <button
                       onClick={() => setCreateRestaurantFormShow(true)}
                       className="me-3 fs-6"
                     >
                       Signup
                     </button>
-                  )}
                 </div>
               </div>
             </div>
@@ -57,6 +53,14 @@ const Home = () => {
             <h1 style={{ fontSize: "60px" }} className="fw-bold">
               menu online
             </h1>
+            <button className="mt-3 text-white">
+              <Link
+                className="text-white text-decoration-none"
+                href={`/subscribe`}
+              >
+                Subscribe
+              </Link>
+            </button>
           </div>
         </div>
         {createRestaurantFormShow ? (

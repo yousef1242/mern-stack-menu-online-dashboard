@@ -245,7 +245,7 @@ const UpdateProductPage = () => {
                 <div className={classes.addProductFormGroupDivOverlayImage}>
                   <label htmlFor="file">Update</label>
                   <img
-                    src={file ? URL.createObjectURL(file) : productImage}
+                    src={file ? URL.createObjectURL(file) : productImage?.url}
                     className={`${classes.addProductFormGroupDivImage} img-fluid`}
                     alt=""
                   />

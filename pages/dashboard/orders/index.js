@@ -15,18 +15,20 @@ import { Dropdown } from "react-bootstrap";
 
 const socket = io("https://menuonline.onrender.com");
 
-const DashboardProducts = ({ orders, errorMessage }) => {
+const DashboardProducts = ({ orders, errorMessage, error }) => {
   const [ordersData, setOrdersData] = useState([]);
   const [searchInputValue, setSearchInputValue] = useState("");
   const router = useRouter();
 
   // errors
   useEffect(() => {
-    if (errorMessage) {
-      toast.error(errorMessage);
+    if (errorMessage || error) {
+      if (errorMessage) {
+        toast.error(errorMessage);
+      }
       Cookies.remove("restaurantTokenAndId");
       setTimeout(() => {
-        router.push("/subscribe");
+        router.push("/");
       }, 2000);
     }
   }, [errorMessage]);
@@ -174,7 +176,9 @@ const DashboardProducts = ({ orders, errorMessage }) => {
       searchInputValue === ""
         ? ordersData
         : ordersData?.filter((order) =>
-            order.orderNumber.toLowerCase().includes(searchInputValue.toLowerCase())
+            order.orderNumber
+              .toLowerCase()
+              .includes(searchInputValue.toLowerCase())
           );
     setOrdersData(filterOrders);
   };
@@ -182,7 +186,7 @@ const DashboardProducts = ({ orders, errorMessage }) => {
   // reset search input
   const resetSearchInput = () => {
     setOrdersData(orders);
-    setSearchInputValue("")
+    setSearchInputValue("");
   };
 
   return (
@@ -242,7 +246,7 @@ const DashboardProducts = ({ orders, errorMessage }) => {
                 </Dropdown>
               </div>
             </div>
-            <div className="mb-5 d-flex align-items-center justify-content-center gap-2">
+            <div className="mb-5 d-flex align-items-center justify-content-center gap-2 px-4">
               <input
                 type="text"
                 className={classes.dashbaordPageSearchInputFilter}
@@ -407,11 +411,11 @@ export async function getServerSideProps(context) {
       },
     };
   } catch (error) {
-    console.log(error);
     // In case of an error, return an empty object or an error message, or handle it as needed
     return {
       props: {
         errorMessage: error?.response?.data?.message,
+        error: error,
       },
     };
   }

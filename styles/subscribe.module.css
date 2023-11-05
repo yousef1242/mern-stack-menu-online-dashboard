@@ -1,0 +1,16 @@
+.SubscribeEmailRestaurantInput{
+    width: 100%;
+    border: 1px solid var(--border-color);
+    outline: none;
+    padding: 10px;
+    display: block;
+    width: 300px;
+    margin-bottom: 15px;
+}
+.SubscribeEmailRestaurantInput:focus{
+    border-color: var(--border-focus-color);
+    outline: none;
+}
+.SubscribeEmailRestaurantBtn{
+    width: 200px;
+}

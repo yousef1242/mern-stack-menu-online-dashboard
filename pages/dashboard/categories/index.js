@@ -23,7 +23,7 @@ const DashboardCategoriesPage = ({ categories, error }) => {
       toast.error(error);
       Cookies.remove("restaurantTokenAndId");
       setTimeout(() => {
-        router.push("/subscribe");
+        router.push("/");
       }, 2000);
     }
   }, [error]);

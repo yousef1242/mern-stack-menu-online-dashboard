@@ -65,8 +65,8 @@ const ShowProductDetailsModel = ({
         <div className={classes.showProductDetailsModelDiv}>
           <div className="mb-4 position-relative">
             <div className={product?.isAvilable ? "" : classes.overlay}></div>
-            {product?.image ? (
-              <Image alt="" src={product?.image} width={300} height={300} />
+            {product?.image.url ? (
+              <Image alt="" src={product?.image.url} width={300} height={300} />
             ) : (
               <LoaderAnimation />
             )}

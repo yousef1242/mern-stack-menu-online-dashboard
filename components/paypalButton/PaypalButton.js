@@ -6,26 +6,15 @@ import requestDashboard from "@/utils/requestDashboard";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 import LoaderAnimation from "../loaderAnimation/LoaderAnimation";
-import Cookies from "js-cookie";
 
 const PaypalButton = ({
   selectedOptionAmount,
   setPaypalButtonModel,
   selectedOption,
+  restaurantEmail,
 }) => {
-  let restaurantId;
-
   const router = useRouter();
   const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    const getRestaurantId = Cookies.get("restaurantId")
-      ? JSON.parse(Cookies.get("restaurantId"))
-      : null;
-    if (getRestaurantId) {
-      restaurantId = getRestaurantId;
-    }
-  }, []);
 
   const initialOptions = {
     clientId:
@@ -54,23 +43,50 @@ const PaypalButton = ({
                 });
               }}
               onApprove={(data, actions) => {
-                return actions.order.capture().then(async (details) => {
-                  setLoading(true);
-                  try {
-                    const { data } = await requestDashboard.put(
-                      `/api/restaurant/subscribe/${restaurantId}`,
-                      {
-                        planName: selectedOption,
+                return actions.order
+                  .capture()
+                  .then(async (details) => {
+                    setLoading(true);
+                    try {
+                      const { data } = await requestDashboard.put(
+                        `/api/restaurant/subscribe`,
+                        {
+                          planName: selectedOption,
+                          restaurantEmail: restaurantEmail,
+                        }
+                      );
+                      if (data?.message) {
+                        // Subscription was successful, capture the payment
+                        const captureResult = await actions.order.capture();
+                        if (captureResult.status === "COMPLETED") {
+                          toast.success(data.message);
+                          router.push("/");
+                        } else {
+                          // Handle payment capture failure
+                          toast.error("Payment capture failed.");
+                        }
+                      } else {
+                        // Handle unexpected response from the API
+                        toast.error("An unexpected error occurred.");
                       }
-                    );
-                    toast.success(data?.message);
-                    router.push("/");
-                  } catch (error) {
-                    console.log(error);
+                    } catch (error) {
+                      console.log(error);
+                      setLoading(false);
+                      if (error.response) {
+                        toast.error(error.response.data.message);
+                      } else {
+                        // Handle other types of errors (e.g., network issues)
+                        toast.error(
+                          "An error occurred while processing your request."
+                        );
+                      }
+                    }
+                  })
+                  .catch((captureError) => {
+                    console.log(captureError);
                     setLoading(false);
-                    toast.error(error?.response?.data?.message)
-                  }
-                });
+                    toast.error("An error occurred during payment capture.");
+                  });
               }}
             />
           </PayPalScriptProvider>

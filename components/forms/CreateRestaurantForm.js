@@ -6,7 +6,6 @@ import dynamic from "next/dynamic";
 import requestDashboard from "@/utils/requestDashboard";
 import LoaderAnimation from "../loaderAnimation/LoaderAnimation";
 import { useRouter } from "next/router";
-import Cookies from "js-cookie";
 
 const CreateRestaurantForm = ({ setCreateRestaurantFormShow }) => {
   const [name, setName] = useState("");
@@ -22,6 +21,7 @@ const CreateRestaurantForm = ({ setCreateRestaurantFormShow }) => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
+  // create restaurant function
   const formSubmitHandler = async (e) => {
     e.preventDefault();
     if (
@@ -56,10 +56,6 @@ const CreateRestaurantForm = ({ setCreateRestaurantFormShow }) => {
         formData
       );
       toast.success(data?.message);
-      Cookies.set(
-        "restaurantId",
-        JSON.stringify(data?.saveRestaurant._id)
-      );
       router.push("/subscribe");
     } catch (error) {
       setLoading(false);

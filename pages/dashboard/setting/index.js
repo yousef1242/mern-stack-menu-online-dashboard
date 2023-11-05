@@ -34,27 +34,34 @@ const DashboardSettingPage = () => {
         router.push("/");
         return toast.error("Token doesn't exist please try again");
       }
-      const { data } = await requestDashboard.get(
-        `/api/restaurant/single/${restaurantInfo?.id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${restaurantInfo?.token}`,
-          },
+      try {
+        const { data } = await requestDashboard.get(
+          `/api/restaurant/single/${restaurantInfo?.id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${restaurantInfo?.token}`,
+            },
+          }
+        );
+        if (data) {
+          setLoading(false);
+          setName(data.restaurantName);
+          setTitle(data.restaurantTitle);
+          setImage(data.restaurantImage);
+          setEmail(data.restaurantEmail);
+          setFacebookLinkPage(data.restaurantFacebookPageLink);
+          setInstagramLinkPage(data.restaurantInstagramPageLink);
+          setAddress(data.restaurantAdress);
+          setOpenTime(data.restaurantOpenTime);
+          setClodeTime(data.restaurantCloseTime);
+          setRestaurantId(data._id);
+          setEndDate(data.restaurantSubscribePlan?.endDate);
         }
-      );
-      if (data) {
-        setLoading(false);
-        setName(data.restaurantName);
-        setTitle(data.restaurantTitle);
-        setImage(data.restaurantImage);
-        setEmail(data.restaurantEmail);
-        setFacebookLinkPage(data.restaurantFacebookPageLink);
-        setInstagramLinkPage(data.restaurantInstagramPageLink);
-        setAddress(data.restaurantAdress);
-        setOpenTime(data.restaurantOpenTime);
-        setClodeTime(data.restaurantCloseTime);
-        setRestaurantId(data._id);
-        setEndDate(data.restaurantSubscribePlan?.endDate);
+      } catch (error) {
+        console.log(error);
+        if (error.response.data.message) {
+          toast.error(error.response.data.message);
+        }
       }
     };
     getRestaurantInfo();
@@ -106,13 +113,13 @@ const DashboardSettingPage = () => {
                   <div
                     className={`${classes.dashboardSettingFormGroup} col-12 text-center mb-4`}
                   >
-                        <Image
-                          alt=""
-                          src={image}
-                          width={100}
-                          height={100}
-                          loading="lazy"
-                        />
+                    <Image
+                      alt=""
+                      src={image}
+                      width={100}
+                      height={100}
+                      loading="lazy"
+                    />
                   </div>
                   <div
                     className={`${classes.dashboardSettingFormGroup} col-12 col-md-6`}
