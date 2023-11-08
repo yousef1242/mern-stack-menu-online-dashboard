@@ -49,7 +49,7 @@ const DashboardProducts = ({ orders, errorMessage, error }) => {
     if (restaurantData) {
       socket.emit("joinRestaurantRoom", { restaurantId: restaurantData.id });
     }
-  }, []);
+  }, [router.query.prepared, router.query.paid]);
 
   useEffect(() => {
     socket.on("newOrderCreatedToRestaurantId", (data) => {
@@ -91,7 +91,7 @@ const DashboardProducts = ({ orders, errorMessage, error }) => {
         return prevOrders;
       });
     });
-  }, [socket]);
+  }, [socket,router.query.prepared, router.query.paid]);
 
   // update order status function
   const updateOrderWhichIsPrepared = async (orderId, orderNumber) => {

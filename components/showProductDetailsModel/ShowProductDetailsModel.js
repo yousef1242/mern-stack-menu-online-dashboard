@@ -18,6 +18,7 @@ const ShowProductDetailsModel = ({
   const router = useRouter();
   const [loading, setLoading] = useState(false);
 
+  // delete product function
   const submitFormHandler = async (e) => {
     e.preventDefault();
     const restaurantInfo = Cookies.get("restaurantTokenAndId")
@@ -36,7 +37,6 @@ const ShowProductDetailsModel = ({
           },
         }
       );
-      console.log(data);
       toast.success(data?.message);
       setLoading(false);
       setShowProductDetailsModel(false);
