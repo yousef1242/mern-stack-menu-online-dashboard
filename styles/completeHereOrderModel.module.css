@@ -1,0 +1,74 @@
+.completeOrderModel {
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  overflow-y: scroll;
+  z-index: 99;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.completeOrderModel::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #00000057;
+}
+.completeOrderModel .completeOrderModelDiv {
+  width: 400px;
+  background-color: #fff;
+  z-index: 99;
+  border-radius: 5px;
+  padding: 15px 10px;
+}
+
+.completeOrderModel .completeOrderModelDiv .completeOrderModelDivHeader {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #000;
+  font-weight: bold;
+}
+.completeOrderModel .completeOrderModelDiv .completeOrderModelFormGroup {
+  margin-bottom: 10px;
+  width: 100%;
+}
+.completeOrderModel .completeOrderModelDiv .completeOrderModelFormGroup input {
+  width: 100%;
+  border: 1px solid var(--border-color);
+  outline: none;
+  padding: 10px;
+}
+.completeOrderModel
+  .completeOrderModelDiv
+  .completeOrderModelFormGroup
+  input:focus {
+  border-color: var(--border-focus-color);
+  outline: none;
+}
+.completeOrderModel
+  .completeOrderModelDiv
+  .completeOrderModelFormGroup
+  textarea {
+  width: 100%;
+  border: 1px solid var(--border-color);
+  outline: none;
+  padding: 10px;
+  height: 100px;
+}
+.completeOrderModel
+  .completeOrderModelDiv
+  .completeOrderModelFormGroup
+  textarea:focus {
+  border-color: var(--border-focus-color);
+  outline: none;
+}
+@media screen and (max-width: 443px) {
+  .completeOrderModel .completeOrderModelDiv {
+    width: 300px;
+  }
+}

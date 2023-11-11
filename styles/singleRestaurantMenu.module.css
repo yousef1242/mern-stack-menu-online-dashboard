@@ -1,0 +1,254 @@
+.singleRestaurantMenuPage {
+  height: 100vh;
+  overflow: scroll;
+  padding-top: 78px;
+}
+.singleRestaurantMenuPage::-webkit-scrollbar {
+  display: none;
+}
+.singleRestaurantMenuPage .singleRestaurantSection {
+  width: 70%;
+  box-shadow: 0 0 10px #efefef;
+  height: auto;
+}
+.singleRestaurantMenuPage
+  .singleRestaurantSection
+  .singleRestaurantSectionHeader {
+  padding: 30px 0;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.singleRestaurantMenuPage
+  .singleRestaurantSection
+  .singleRestaurantSectionHeader
+  .singleRestaurantSectionHeaderImageDiv {
+  width: 100px;
+  height: 100px;
+  padding: 5px;
+  border: 1px solid var(--border-color);
+}
+.singleRestaurantMenuPage
+  .singleRestaurantSection
+  .singleRestaurantSectionHeader
+  .singleRestaurantSectionHeaderImageDiv
+  img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+.singleRestaurantMenuPage
+  .singleRestaurantSection
+  .singleRestaurantSectionHeader
+  a {
+  color: var(--btn-bg-color);
+  margin-right: 5px;
+}
+.singleRestaurantMenuPage
+  .singleRestaurantSection
+  .singleRestaurantSectionHeader
+  span {
+  margin-bottom: 10px;
+  display: block;
+}
+.singleRestaurantMenuPage
+  .singleRestaurantSection
+  .singleRestaurantSectionHeader
+  h3 {
+  margin-bottom: 15px;
+  font-weight: 600;
+  color: var(--headlines-color);
+}
+.singleRestaurantMenuPage
+  .singleRestaurantSection
+  .singleRestaurantSectionMenu {
+  padding: 30px 0;
+}
+.singleRestaurantMenuPage
+  .singleRestaurantSection
+  .singleRestaurantSectionMenu
+  .singleRestaurantSectionMenuCategories {
+  border: 1px solid var(--border-color);
+  box-shadow: 0 0 10px #efefef;
+}
+.singleRestaurantMenuPage
+  .singleRestaurantSection
+  .singleRestaurantSectionMenu
+  .singleRestaurantSectionMenuCategories
+  span {
+  padding: 4px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  font-weight: 500;
+  display: block;
+  width: 100%;
+}
+.singleRestaurantMenuPage
+  .singleRestaurantSection
+  .singleRestaurantSectionMenu
+  .singleRestaurantSectionMenuCategories
+  span:hover {
+  background-color: var(--btn-hover-bg-color);
+  color: #fff;
+}
+.singleRestaurantMenuPage
+  .singleRestaurantSection
+  .singleRestaurantSectionMenu
+  .singleRestaurantSectionMenuCategories
+  .activeCategory {
+  background-color: var(--btn-hover-bg-color);
+  color: #fff;
+}
+.singleRestaurantMenuPage
+  .singleRestaurantSection
+  .singleRestaurantSectionMenu
+  .singleRestaurantSectionMenuProducts {
+  overflow: scroll;
+  height: 500px;
+}
+.singleRestaurantMenuPage
+  .singleRestaurantSection
+  .singleRestaurantSectionMenu
+  .singleRestaurantSectionMenuProducts::-webkit-scrollbar {
+  display: none;
+}
+.singleRestaurantMenuPage
+  .singleRestaurantSection
+  .singleRestaurantSectionMenu
+  .singleRestaurantSectionMenuProducts
+  .singleRestaurantSectionMenuProductsDiv {
+  padding: 10px;
+  border-bottom: 1px solid var(--border-color);
+}
+.singleRestaurantMenuPage
+  .singleRestaurantSection
+  .singleRestaurantSectionMenu
+  .singleRestaurantSectionMenuProducts
+  .singleRestaurantSectionMenuProductsDiv
+  .singleRestaurantSectionMenuProductsDivImageDiv {
+  position: relative;
+  width: 85px;
+  height: 85px;
+}
+.singleRestaurantMenuPage
+  .singleRestaurantSection
+  .singleRestaurantSectionMenu
+  .singleRestaurantSectionMenuProducts
+  .singleRestaurantSectionMenuProductsDiv
+  .singleRestaurantSectionMenuProductsDivImageDiv
+  img {
+  object-fit: cover;
+}
+.singleRestaurantMenuPage
+  .singleRestaurantSection
+  .singleRestaurantSectionMenu
+  .singleRestaurantSectionMenuProducts
+  .singleRestaurantSectionMenuProductsDiv
+  h4 {
+  color: var(--small-headlines-color);
+  margin-bottom: 10px;
+  cursor: pointer;
+  font-size: 17px;
+}
+.singleRestaurantMenuPage
+  .singleRestaurantSection
+  .singleRestaurantSectionMenu
+  .singleRestaurantSectionMenuProducts
+  .singleRestaurantSectionMenuProductsDiv
+  p {
+  color: #777;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.singleRestaurantMenuPage
+  .singleRestaurantSection
+  .singleRestaurantSectionMenu
+  .singleRestaurantSectionMenuProducts
+  .singleRestaurantSectionMenuProductsCategorySpan {
+  width: 100%;
+  padding: 10px;
+  background-color: var(--btn-hover-bg-color);
+  display: block;
+  margin-bottom: 10px;
+  color: #fff;
+}
+.singleRestaurantMenuPage
+  .singleRestaurantSection
+  .singleRestaurantSectionMenu
+  .singleRestaurantSectionMenuCart
+  .singleRestaurantSectionMenuCartHeader {
+  width: 100%;
+  padding: 5px;
+  background-color: var(--btn-hover-bg-color);
+  color: var(--text-color);
+}
+.singleRestaurantMenuPage
+  .singleRestaurantSection
+  .singleRestaurantSectionMenu
+  .singleRestaurantSectionMenuCart
+  .singleRestaurantSectionMenuCartBodyEmpty {
+  width: 100%;
+  height: 100%;
+  background-color: rgb(245, 245, 245);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 10px;
+  text-align: center;
+}
+.singleRestaurantMenuPage
+  .singleRestaurantSection
+  .singleRestaurantSectionMenu
+  .singleRestaurantSectionMenuCart
+  .singleRestaurantSectionMenuCartBodyEmpty
+  h6 {
+  font-size: 30px;
+}
+.singleRestaurantSectionMenuProductBodyDivOverlay {
+  height: 100%;
+  position: absolute;
+  top: 0;
+  color: #000;
+  background-color: #fff;
+  opacity: 0.75;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  left: 0;
+  width: 100%;
+}
+.singleRestaurantSectionMenuProductBodyDivOverlay::before {
+  content: "unAvilable";
+  position: absolute;
+  font-size: 15px;
+  font-weight: bold;
+  z-index: 99999;
+}
+
+@media (max-width: 993px) {
+  .singleRestaurantMenuPage
+    .singleRestaurantSection
+    .singleRestaurantSectionMenu
+    .singleRestaurantSectionMenuCategories {
+    display: flex;
+    width: 100%;
+    margin-bottom: 20px;
+    overflow: scroll;
+    gap: 10px;
+  }
+  .singleRestaurantMenuPage
+    .singleRestaurantSection
+    .singleRestaurantSectionMenu
+    .singleRestaurantSectionMenuCategories
+    span {
+    margin-bottom: 0;
+  }
+}
+@media (max-width: 530px) {
+  .singleRestaurantMenuPage .singleRestaurantSection {
+    width: 100%;
+  }
+}

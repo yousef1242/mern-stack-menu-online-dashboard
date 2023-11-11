@@ -1,0 +1,80 @@
+.showProductDetailsModel {
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  background-color: #00000057;
+  z-index: 99;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-y: scroll;
+}
+.showProductDetailsModel::-webkit-scrollbar {
+  display: none;
+}
+
+.showProductDetailsModel .showProductDetailsModelDiv {
+  width: 400px;
+  background-color: #fff;
+  z-index: 99;
+  border-radius: 5px;
+  padding: 15px 10px;
+  margin-top: auto;
+}
+.showProductDetailsModel .showProductDetailsModelDiv .overlay {
+  height: 100%;
+  position: absolute;
+  top: 0;
+  color: #000;
+  background-color: #fff;
+  opacity: 0.75;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  left: 0;
+  width: 100%;
+}
+.showProductDetailsModel .showProductDetailsModelDiv .overlay::before {
+  content: "unAvilable";
+  position: absolute;
+  font-size: 30px;
+  font-weight: bold;
+  z-index: 99999;
+}
+
+.showProductDetailsModel .showProductDetailsModelDiv img {
+  height: 300px !important;
+  border-radius: 5px;
+  width: 100%;
+  object-fit: cover!important;
+}
+.showProductDetailsModel h1 {
+  position: absolute;
+  top: 18px;
+  cursor: pointer;
+  color: var(--text-color);
+  right: 100px;
+  z-index: 99999;
+  background-color: var(--text-color);
+  color: #000;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  height: 43px;
+  width: 43px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@media screen and (max-width: 540px) {
+  .showProductDetailsModel h1 {
+    right: 7px;
+  }
+}
+@media screen and (max-width: 443px) {
+  .showProductDetailsModel .showProductDetailsModelDiv {
+    width: 300px;
+  }
+}
