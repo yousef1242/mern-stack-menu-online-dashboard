@@ -56,6 +56,98 @@ const Subscribe = () => {
     addPaypalScript();
   }, []);
 
+  const API_KEY =
+    "ZXlKaGJHY2lPaUpJVXpVeE1pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmpiR0Z6Y3lJNklrMWxjbU5vWVc1MElpd2ljSEp2Wm1sc1pWOXdheUk2T0RJME9UazRMQ0p1WVcxbElqb2lhVzVwZEdsaGJDSjkuY3RsNWNGTUpYbktnRTduYmVGNkYtSlZWa0o5dWtzY2ZZYWZiRTQ5VzNkN3N4UFhYRHdxWkVRTlN4YnhGQmRvVUFsbmxzVngtZ2ZqSmYxUkgyOFlNb2c=";
+
+  const firststep = async () => {
+    let data = {
+      api_key: API_KEY,
+    };
+
+    let request = await fetch("https://accept.paymob.com/api/auth/tokens", {
+      method: "post",
+      headers: { "content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+
+    let response = await request.json();
+
+    let token = response.token;
+
+    secondstep(token);
+  };
+
+  const secondstep = async (token) => {
+    let data = {
+      auth_token: token,
+      delivery_needed: "false",
+      amount_cents: selectedOptionAmount,
+      currency: "EGP",
+      items: [],
+    };
+
+    let request = await fetch(
+      " https://accept.paymob.com/api/ecommerce/orders",
+      {
+        method: "post",
+        headers: { "content-Type": "application/json" },
+        body: JSON.stringify(data),
+      }
+    );
+
+    let response = await request.json();
+
+    let id = response.id;
+
+    thirdstep(id, token);
+  };
+
+  const thirdstep = async (id, token) => {
+    let data = {
+      auth_token: token,
+      amount_cents: selectedOptionAmount,
+      expiration: 3600,
+      order_id: id,
+      billing_data: {
+        apartment: "test_data",
+        email: "test_data",
+        floor: "test_data",
+        first_name: "test_data",
+        street: "test_data",
+        building: "test_data",
+        phone_number: "test_data",
+        shipping_method: "test_data",
+        postal_code: "test_data",
+        city: "test_data",
+        country: "test_data",
+        last_name: "test_data",
+        state: "test_data",
+      },
+      currency: "EGP",
+      integration_id: 3925114,
+    };
+
+    let request = await fetch(
+      "https://accept.paymob.com/api/acceptance/payment_keys",
+      {
+        method: "post",
+        headers: { "content-Type": "application/json" },
+        body: JSON.stringify(data),
+      }
+    );
+
+    let response = await request.json();
+
+    let lastToken = response.token;
+
+    cardpayment(lastToken);
+  };
+
+  const cardpayment = async (lastToken) => {
+    let iframeurl = `https://accept.paymob.com/api/acceptance/iframes/767450?payment_token=${lastToken}`;
+    window.open(iframeurl, "_blank");
+  };
+
   return (
     <>
       <Head>
@@ -123,9 +215,7 @@ const Subscribe = () => {
               </div>
               <div className="text-center mt-4">
                 {selectedOption !== null && (
-                  <button onClick={() => setPaypalButtonModel(true)}>
-                    Continue
-                  </button>
+                  <button onClick={firststep}>Continue</button>
                 )}
               </div>
               <div className="d-flex mt-5 align-items-center justify-content-between flex-wrap gap-3">
@@ -175,16 +265,6 @@ const Subscribe = () => {
               /* Add any other styling you desire */
             }
           `}</style>
-          {paypalButtonModel ? (
-            <PaypalButton
-              selectedOptionAmount={selectedOptionAmount}
-              setPaypalButtonModel={setPaypalButtonModel}
-              selectedOption={selectedOption}
-              restaurantEmail={restaurantEmail}
-            />
-          ) : (
-            ""
-          )}
         </div>
       ) : (
         <div
