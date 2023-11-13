@@ -23,7 +23,7 @@ const PaymentCallback = () => {
           pathname: router.pathname,
           query: { id: id },
         };
-        router.replace(newUrl, undefined, { shallow: true });
+        router.push(newUrl, undefined, { shallow: true });
       }, 0);
 
       if (id) {
