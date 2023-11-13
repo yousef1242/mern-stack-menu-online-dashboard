@@ -1,7 +1,6 @@
 import Head from "next/head";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { AiOutlineCheck } from "react-icons/ai";
-import PaypalButton from "@/components/paypalButton/PaypalButton";
 import classes from "../../styles/subscribe.module.css";
 import { toast } from "react-toastify";
 import requestDashboard from "@/utils/requestDashboard";
@@ -10,7 +9,6 @@ import LoaderAnimation from "@/components/loaderAnimation/LoaderAnimation";
 const Subscribe = () => {
   const [selectedOption, setSelectedOption] = useState(null);
   const [selectedOptionAmount, setSelectedOptionAmount] = useState(null);
-  const [paypalButtonModel, setPaypalButtonModel] = useState(false);
   const [loadingAnimation, setLoadingAnimation] = useState(false);
   const [restaurantEmail, setRestaurantEmail] = useState("");
   const [restaurantSubscribeContinue, setRestaurantSubscribeContinue] =
@@ -46,19 +44,10 @@ const Subscribe = () => {
     }
   };
 
-  useEffect(() => {
-    const addPaypalScript = () => {
-      const script = document.createElement("script");
-      script.src = `/https://www.paypal.com/sdk/js?client-id=AbTGtqzJWKJ9brn4-2juwbFOunwp92NTqcGQ_-nGuqAR4Bx90MuOhyaoTLHxgQI4dzAUqnXSrSpxECxL`;
-
-      document.body.appendChild(script);
-    };
-    addPaypalScript();
-  }, []);
-
   const API_KEY =
     "ZXlKaGJHY2lPaUpJVXpVeE1pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SmpiR0Z6Y3lJNklrMWxjbU5vWVc1MElpd2ljSEp2Wm1sc1pWOXdheUk2T0RJME9UazRMQ0p1WVcxbElqb2lhVzVwZEdsaGJDSjkuY3RsNWNGTUpYbktnRTduYmVGNkYtSlZWa0o5dWtzY2ZZYWZiRTQ5VzNkN3N4UFhYRHdxWkVRTlN4YnhGQmRvVUFsbmxzVngtZ2ZqSmYxUkgyOFlNb2c=";
 
+  // paymob api handle
   const firststep = async () => {
     let data = {
       api_key: API_KEY,
@@ -96,6 +85,7 @@ const Subscribe = () => {
     );
 
     let response = await request.json();
+    console.log(token);
 
     let id = response.id;
 
@@ -110,7 +100,7 @@ const Subscribe = () => {
       order_id: id,
       billing_data: {
         apartment: "test_data",
-        email: "test_data",
+        email: restaurantEmail,
         floor: "test_data",
         first_name: "test_data",
         street: "test_data",
@@ -121,7 +111,7 @@ const Subscribe = () => {
         city: "test_data",
         country: "test_data",
         last_name: "test_data",
-        state: "test_data",
+        state: selectedOption, // save plane name in state option
       },
       currency: "EGP",
       integration_id: 3925114,
@@ -145,7 +135,7 @@ const Subscribe = () => {
 
   const cardpayment = async (lastToken) => {
     let iframeurl = `https://accept.paymob.com/api/acceptance/iframes/767450?payment_token=${lastToken}`;
-    window.open(iframeurl, "_blank");
+    window.open(iframeurl);
   };
 
   return (

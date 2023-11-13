@@ -1,0 +1,39 @@
+.paymentCallbackPage {
+  height: 100vh;
+  overflow: hidden;
+}
+.paymentCallbackPage .paymentResultDiv {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+.paymentCallbackPage .paymentResultDiv p{
+    font-size: 20px;
+    font-weight: 600;
+}
+.paymentCallbackPage .paymentResultDiv .containPAndIconDiv{
+    background-color: white;
+    width: 400px;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: 0 0 10px #ece2e2;
+}
+.paymentCallbackPage .paymentResultDiv .correctIconDiv,
+.paymentCallbackPage .paymentResultDiv .wrongIconDiv {
+  text-align: center;
+  margin-bottom: 15px;
+}
+.paymentCallbackPage .paymentResultDiv .correctIconDiv svg {
+  color: green;
+}
+.paymentCallbackPage .paymentResultDiv .wrongIconDiv svg {
+  color: #d52424;
+}
+.paymentCallbackPage .paymentResultDiv .correctIconDiv svg,
+.paymentCallbackPage .paymentResultDiv .wrongIconDiv svg {
+  font-size: 70px;
+}
