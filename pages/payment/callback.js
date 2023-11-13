@@ -23,8 +23,8 @@ const PaymentCallback = () => {
           pathname: router.pathname,
           query: { id: id },
         };
-        router.push(newUrl, undefined, { shallow: true });
-      }, 0);
+        router.push(newUrl);
+      }, 1000);
 
       if (id) {
         const API_KEY =
