@@ -1,4 +1,5 @@
 import ClientNavbar from "@/components/clientNavbar/ClientNavbar";
+import { MdOutlineShoppingCartCheckout } from "react-icons/md"
 import classes from "../../styles/singleRestaurantMenu.module.css";
 import Head from "next/head";
 import { useEffect, useState } from "react";
@@ -109,6 +110,13 @@ const SingleRestaurantPage = ({ products, error, errorMessage }) => {
       pathname: `/restaurant/${restaurantId}`,
       query,
     });
+  };
+  
+  const scrollToSection = (sectionId) => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   return (
@@ -236,7 +244,7 @@ const SingleRestaurantPage = ({ products, error, errorMessage }) => {
                   ))}
                 </div>
               </div>
-              <div className="col-12 col-md-4 col-lg-3">
+              <div className="col-12 col-md-4 col-lg-3" id="cartSection">
                 <div className={classes.singleRestaurantSectionMenuCart}>
                   {cart?.length > 0 ? (
                     <div className="alert alert-warning mb-3">
@@ -371,6 +379,7 @@ const SingleRestaurantPage = ({ products, error, errorMessage }) => {
       ) : (
         ""
       )}
+      <button onClick={() => scrollToSection("cartSection")} className={classes.goToCartSectionBtn}><MdOutlineShoppingCartCheckout /></button>
     </>
   );
 };
